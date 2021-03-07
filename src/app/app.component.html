@@ -1,4 +1,5 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<h1 class="a" [@animation]="start">Here is  your coupon</h1>
+<div>
+  <button (click)="start=!start">ok</button>
+</div>
+{{start}}
