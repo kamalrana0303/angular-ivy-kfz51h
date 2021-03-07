@@ -1,5 +1,13 @@
-<h1 class="a" [@animation]="start">Here is  your coupon</h1>
-<div>
-  <button (click)="start=!start">ok</button>
+<div style="border: 1px solid black;"  style="padding:-5px">
+  <h1 class="a" [@animation]>Here is your coupon</h1>
 </div>
-{{start}}
+<div>
+  <button
+    @expandOut
+    @shrinkOut
+    [style.width.%]="30"
+    style="background-color:red;padding:5px;border:none; height:40px"
+  >
+    Submit
+  </button>
+</div>

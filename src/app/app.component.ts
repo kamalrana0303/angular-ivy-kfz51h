@@ -1,30 +1,75 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, VERSION } from '@angular/core';
+import {
+  animate,
+  keyframes,
+  state,
+  style,
+  transition,
+  trigger
+} from "@angular/animations";
+import { Component, VERSION } from "@angular/core";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ],
-  animations:[
-    trigger('animation',[
-      state('true',style({
-        height:'200px',
-        opacity:1
-      })),
-      state('false',style({
-        height:'100px',
-        opacity:0.5
-      })),
-      transition('true=>false',[
-        animate('1s')
-      ]),
-      transition("false=>true",[
-        animate("0.5s")
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
+  animations: [
+    trigger("animation", [
+      state(":enter", style({ transform: "rotate(0deg)" })),
+      state(":leave", style({ transform: "rotate(0deg)" })),
+      transition("*=>*", [
+        animate(
+          "250ms",
+          keyframes([
+            style({ transform: "rotate(25deg)" }),
+            style({ transform: "rotate(0deg)" }),
+            style({ transform: "rotate(-25deg)" }),
+            style({ transform: "rotate(0deg)" }),
+            style({ transform: "rotate(15deg)" }),
+            style({ transform: "rotate(0deg)" }),
+            style({ transform: "rotate(-15deg)" }),
+            style({ transform: "rotate(-5deg)" }),
+            style({ transform: "rotate(0deg)" }),
+            style({ transform: "rotate(5deg)" }),
+            style({ transform: "rotate(0deg)" })
+          ])
+        )
       ])
-      ]
-    )
+    ]),
+    trigger("shrinkOut", [
+      state(":enter", style({ height: "*" })),
+      transition(
+        ":leave",
+        animate(
+          "50ms",
+          style({
+            height: 0,
+            padding: 0
+          })
+        )
+      )
+    ]),
+    trigger("expandOut", [
+      state(":leave", style({ height: 0 })),
+      transition(
+        ":enter",
+        animate(
+          "50ms",
+          keyframes([
+            style({ height: 0, padding: 0 }),
+            style({ height: "45px", padding: "5px" })
+          ])
+        )
+      )
+    ]),
+    trigger("fallOut", [
+      state(":enter", style({ padding: "0px" })),
+      transition(
+        "*=>*",
+        style({
+          padding: "0px"
+        })
+      )
+    ])
   ]
 })
-export class AppComponent  {
-  start:boolean=false;
-}
+export class AppComponent {}
