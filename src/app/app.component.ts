@@ -7,6 +7,7 @@ import {
   trigger
 } from "@angular/animations";
 import { Component, VERSION } from "@angular/core";
+import { FormBuilder, FormControl, Validators } from "@angular/forms";
 
 @Component({
   selector: "my-app",
@@ -72,4 +73,14 @@ import { Component, VERSION } from "@angular/core";
     ])
   ]
 })
-export class AppComponent {}
+export class AppComponent {
+  fg;
+  constructor(private fb:FormBuilder){
+
+  }
+  ngOnInit(){
+    this.fg=this.fb.group({
+      name:['',Validators.required]
+    })
+  }
+}
